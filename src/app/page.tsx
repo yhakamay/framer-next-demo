@@ -8,6 +8,7 @@ import styles from "./page.module.css";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpen2, setIsOpen2] = useState(false);
   const [clicked, setClicked] = useState(false);
 
   return (
@@ -43,10 +44,10 @@ export default function Home() {
         <motion.div
           className={styles.modal}
           layout
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => setIsOpen2(!isOpen2)}
           variants={{
             open: {
-              position: "inherit",
+              position: "fixed",
               top: 0,
               left: 0,
               width: "100vw",
@@ -58,7 +59,7 @@ export default function Home() {
               transition: { type: "tween", duration: 1.2 },
             },
           }}
-          animate={isOpen ? "open" : "closed"}
+          animate={isOpen2 ? "open" : "closed"}
         >
           <Image src="/vercel.svg" width={200} height={200} alt={"vercel"} />
         </motion.div>
