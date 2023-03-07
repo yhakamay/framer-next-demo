@@ -1,12 +1,51 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  padding: 20px;
+}
+
+.spinning_shape {
+  margin-top: 20px;
+  width: 100px;
+  height: 100px;
+  background-color: #333333;
+  margin-bottom: 20px;
+}
+
+.modal_placeholder {
+  width: 300px;
+  height: 200px;
+}
+
+.modal {
+  display: flex;
+  cursor: pointer;
+  width: 300px;
+  height: 200px;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  border: #333333 solid 1px;
+  border-radius: 5px;
+}
+
 .button {
-  background-color: #4caf50;
+  margin-top: 20px;
+  background-color: #333333;
   border: none;
   color: white;
   padding: 15px 32px;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
+}
+
+.draggable {
+  margin-top: 20px;
+  display: flex;
+  width: 100px;
+  height: 100px;
+  background-color: #333333;
+  margin-bottom: 20px;
+  justify-content: center;
+  align-items: center;
 }
