@@ -45,8 +45,11 @@ export default function Home() {
           className={styles.modal}
           layout
           onClick={() => setIsOpen2(!isOpen2)}
+          initial={{ opacity: 0, scale: 0.5 }}
           variants={{
             open: {
+              opacity: 1,
+              scale: 1,
               position: "fixed",
               top: 0,
               left: 0,
@@ -55,7 +58,8 @@ export default function Home() {
               transition: { type: "tween", duration: 1.2 },
             },
             closed: {
-              scale: 1,
+              opacity: 0,
+              scale: 0.5,
               transition: { type: "tween", duration: 1.2 },
             },
           }}
