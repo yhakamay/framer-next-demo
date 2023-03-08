@@ -7,67 +7,109 @@ import { useState } from "react";
 import styles from "./page.module.css";
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpen2, setIsOpen2] = useState(false);
-  const [clicked, setClicked] = useState(false);
+  const [selectedId, setSelectedId] = useState<null | number>(null);
+  const [clicked, setClicked] = useState<boolean>(false);
 
   return (
     <main className={styles.main}>
       <h1>Framer Motion x Next.js Demo</h1>
-      <h2>Modal with position: inherit</h2>
-      <div className={styles.modal_placeholder}>
+      <div className={styles.card_list}>
         <motion.div
-          className={styles.modal}
-          layout
-          onClick={() => setIsOpen(!isOpen)}
-          variants={{
-            open: {
-              position: "inherit",
-              top: 0,
-              left: 0,
-              width: "100vw",
-              height: "100vh",
-              transition: { type: "tween", duration: 1.2 },
-            },
-            closed: {
-              scale: 1,
-              transition: { type: "tween", duration: 1.2 },
-            },
-          }}
-          animate={isOpen ? "open" : "closed"}
-        >
-          <Image src="/vercel.svg" width={200} height={200} alt={"vercel"} />
-        </motion.div>
+          className={styles.overlay}
+          initial={false}
+          animate={{ opacity: selectedId === null ? 0 : 1 }}
+          transition={{ duration: 0.4 }}
+          style={{ pointerEvents: !selectedId ? "none" : "auto" }}
+          onClick={() => setSelectedId(null)}
+        />
+        {products.map((product) => (
+          <>
+            <div className={styles.card_placeholder}>
+              <motion.div
+                key={product.id}
+                onClick={
+                  selectedId === product.id
+                    ? () => setSelectedId(null)
+                    : () => setSelectedId(product.id)
+                }
+                className={styles.card}
+                variants={{
+                  open: {
+                    border: "none",
+                    position: "absolute",
+                    top: "60%",
+                    left: "50%",
+                    marginRight: "-50%",
+                    transform: "translate(-50%, -50%)",
+                    zIndex: 9999,
+                    width: "80vw",
+                    height: "100vh",
+                  },
+                  closed: {
+                    opacity: 1,
+                  },
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 1000,
+                  damping: 100,
+                  when: "beforeChildren",
+                  staggerChildren: 0.5,
+                }}
+                initial={false}
+                animate={selectedId === product.id ? "open" : "closed"}
+              >
+                <div className={styles.card_content}>
+                  <motion.div
+                    className={styles.card_header}
+                    variants={{
+                      open: {
+                        scale: 3,
+                      },
+                      closed: {
+                        // the default style defined in page.module.css
+                      },
+                    }}
+                    transition={{
+                      type: "tween",
+                      duration: 0.2,
+                    }}
+                    animate={selectedId === product.id ? "open" : "closed"}
+                  >
+                    <Image
+                      src={product.image}
+                      width={100}
+                      height={50}
+                      alt={product.name}
+                    />
+                  </motion.div>
+                  <motion.h3>{product.name}</motion.h3>
+                  <motion.p>{product.price}</motion.p>
+                  <motion.p
+                    variants={{
+                      open: {
+                        opacity: 1,
+                      },
+                      closed: {
+                        opacity: 0,
+                      },
+                    }}
+                    transition={{
+                      type: "tween",
+                      duration: 0.2,
+                    }}
+                    initial={false}
+                    animate={selectedId === product.id ? "open" : "closed"}
+                  >
+                    {product.description}
+                  </motion.p>
+                </div>
+              </motion.div>
+            </div>
+          </>
+        ))}
       </div>
-      <h2>Modal with position: fixed</h2>
-      <div className={styles.modal_placeholder}>
-        <motion.div
-          className={styles.modal}
-          layout
-          onClick={() => setIsOpen2(!isOpen2)}
-          initial={{ opacity: 0, scale: 0.5 }}
-          variants={{
-            open: {
-              opacity: 1,
-              scale: 1,
-              position: "fixed",
-              top: 0,
-              left: 0,
-              width: "100vw",
-              height: "100vh",
-              transition: { type: "tween", duration: 1.2 },
-            },
-            closed: {
-              opacity: 0,
-              scale: 0.5,
-              transition: { type: "tween", duration: 1.2 },
-            },
-          }}
-          animate={isOpen2 ? "open" : "closed"}
-        >
-          <Image src="/vercel.svg" width={200} height={200} alt={"vercel"} />
-        </motion.div>
-      </div>
+
       <motion.div
         className={styles.spinning_shape}
         animate={{
@@ -103,7 +145,9 @@ export default function Home() {
       <motion.div
         initial={false}
         variants={{
-          open: {},
+          open: {
+            // the default style defined in page.module.css
+          },
           closed: { opacity: 0, height: 0 },
         }}
         onClick={() => setClicked(!clicked)}
@@ -113,4 +157,23 @@ export default function Home() {
       </motion.div>
     </main>
   );
+}
+
+const products: {
+  id: number;
+  name: string;
+  description: string;
+  price: string;
+  image: string;
+}[] = [];
+
+for (let i = 0; i < 10; i++) {
+  products.push({
+    id: i,
+    name: "Product " + i,
+    price: "$" + i,
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut aliquam aliquet, nunc elit aliquet nisl, sed aliquam massa justo sit amet elit. Sed euismod, nunc ut aliquam",
+    image: "/next.svg",
+  });
 }
