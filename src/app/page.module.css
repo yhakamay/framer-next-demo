@@ -5,14 +5,6 @@
   padding: 20px;
 }
 
-.spinning_shape {
-  margin-top: 20px;
-  width: 100px;
-  height: 100px;
-  background-color: #333333;
-  margin-bottom: 20px;
-}
-
 .card_list {
   width: 100%;
   display: flex;
@@ -34,11 +26,6 @@
   width: 100%;
 }
 
-.card_placeholder {
-  width: 100px;
-  height: 200px;
-}
-
 .card {
   display: flex;
   justify-content: space-between;
@@ -51,36 +38,27 @@
   height: 200px;
 }
 
-.motion_header {
+.card_open {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid #333333;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  width: 80vw;
+  height: 100vh;
 }
 
 .card_content {
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: center;
-}
-
-.button {
-  margin-top: 20px;
-  background-color: #333333;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-}
-
-.draggable {
-  margin-top: 20px;
-  display: flex;
-  width: 100px;
-  height: 100px;
-  background-color: #333333;
-  margin-bottom: 20px;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
