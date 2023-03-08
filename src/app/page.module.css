@@ -1,12 +1,64 @@
-.button {
-  background-color: #4caf50;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+.main {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  padding: 20px;
+}
+
+.card_list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 3rem;
+}
+
+.overlay {
   cursor: pointer;
+  z-index: 1;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.8);
+  will-change: opacity;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid #333333;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  width: 100px;
+  height: 200px;
+}
+
+.card_open {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid #333333;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  width: 80vw;
+  height: 100vh;
+}
+
+.card_content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
